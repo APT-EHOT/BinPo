@@ -5,13 +5,20 @@ import androidx.lifecycle.ViewModel
 
 class MainFragmentViewModel : ViewModel() {
 
-    val counter: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    val currentNumber: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
     init {
-        counter.value = 0
+        currentNumber.value = "0"
     }
 
-    fun onBtnMainTestClick() {
-        counter.value = counter.value?.let { it + 1 } // let checks for null and returns result from lambda
+    fun onKeyboardButtonClick(index: Int) {
+        currentNumber.value = currentNumber.value?.let {
+            it + when (index) {
+                10 -> "C"
+                11 -> "0"
+                12 -> "OK"
+                else -> (index).toString()
+            }
+        }
     }
 }
