@@ -2,4 +2,9 @@
 <resources>
 
     <dimen name="keyboard_height">200dp</dimen>
+
+    <dimen name="textsize_giant">64sp</dimen>
+    <dimen name="textsize_big">32sp</dimen>
+
+    <dimen name="margin_default">16dp</dimen>
 </resources>

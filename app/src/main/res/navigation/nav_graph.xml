@@ -7,5 +7,18 @@
     <fragment
             android:id="@+id/mainFragment"
             android:name="com.a1218v.binpo.ui.MainFragment"
-            android:label="MainFragment" />
+            android:label="MainFragment" >
+        <action
+                android:id="@+id/action_mainFragment_to_resultFragment"
+                app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/resultFragment"
+            android:name="com.a1218v.binpo.ui.ResultFragment"
+            android:label="ResultFragment" >
+        <argument
+                android:name="numberOfAttempts"
+                app:argType="integer"
+                android:defaultValue="0" />
+    </fragment>
 </navigation>

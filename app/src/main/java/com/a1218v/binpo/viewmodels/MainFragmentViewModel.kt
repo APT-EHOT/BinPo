@@ -5,20 +5,52 @@ import androidx.lifecycle.ViewModel
 
 class MainFragmentViewModel : ViewModel() {
 
-    val currentNumber: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    val state: MutableLiveData<ResultState> = MutableLiveData<ResultState>(ResultState.BEGIN)
+    val currentNumber: MutableLiveData<String> = MutableLiveData<String>("")
 
-    init {
-        currentNumber.value = "0"
-    }
+    private var numbersAmount: Int = 0
+
+    private val targetNumber: Int = (1..100).random()
+    var numberOfAttempts: Int = 0
 
     fun onKeyboardButtonClick(index: Int) {
-        currentNumber.value = currentNumber.value?.let {
-            it + when (index) {
-                10 -> "C"
-                11 -> "0"
-                12 -> "OK"
-                else -> (index).toString()
-            }
+        when (index) {
+            10 -> eraseNumber()
+            11 -> newNumber("0")
+            12 -> submitNumber()
+            else -> newNumber((index).toString())
         }
     }
+
+    private fun newNumber(newNumber: String) {
+        if (numbersAmount >= 3)
+            return
+
+        currentNumber.value = currentNumber.value?.let { it + newNumber }
+        numbersAmount++
+    }
+
+    private fun eraseNumber() {
+        currentNumber.value = currentNumber.value?.dropLast(1)
+        numbersAmount--
+    }
+
+    private fun submitNumber() {
+        val currentNumberInt = currentNumber.value?.toInt() ?: 0
+        when {
+            currentNumberInt > targetNumber -> state.value = ResultState.MORE
+            currentNumberInt < targetNumber -> state.value = ResultState.LESS
+            else -> state.value = ResultState.FINISH
+        }
+        currentNumber.value = ""
+        numbersAmount = 0
+        numberOfAttempts++
+    }
+}
+
+enum class ResultState {
+    BEGIN,
+    LESS,
+    MORE,
+    FINISH
 }

@@ -6,9 +6,12 @@ import android.widget.Button
 import android.widget.GridLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.a1218v.binpo.R
 import com.a1218v.binpo.databinding.MainFragmentBinding
 import com.a1218v.binpo.viewmodels.MainFragmentViewModel
+import com.a1218v.binpo.viewmodels.ResultState
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -20,6 +23,19 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private fun initObservers() {
         viewModel.currentNumber.observe(viewLifecycleOwner) { value ->
             binding.tvMainPlayerInput.text = value
+        }
+        viewModel.state.observe(viewLifecycleOwner) { value ->
+            binding.tvMainHint.text = when (value) {
+                ResultState.BEGIN -> getString(R.string.begin_message)
+                ResultState.MORE -> getString(R.string.more_message)
+                ResultState.LESS -> getString(R.string.less_message)
+                ResultState.FINISH -> {
+                    val action = MainFragmentDirections.actionMainFragmentToResultFragment(viewModel.numberOfAttempts)
+                    findNavController().navigate(action)
+                    ""
+                }
+                else -> getString(R.string.begin_message)
+            }
         }
     }
 
@@ -41,7 +57,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             layoutParams.width = 0
             button.layoutParams = layoutParams
 
-            // button.layoutParams = ViewGroup.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.MATCH_PARENT)
             binding.glMainKeyboard.addView(button)
             button.setOnClickListener { viewModel.onKeyboardButtonClick(i) }
         }
