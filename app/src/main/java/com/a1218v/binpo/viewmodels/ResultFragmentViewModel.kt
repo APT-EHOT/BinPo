@@ -27,7 +27,6 @@ class ResultFragmentViewModel : ViewModel() {
         viewModelScope.launch {
             scoreDao.insertScore(ScoreEntry(0,"Player", newScore))
             scores.value = scoreDao.getBestScores()
-
         }
 
     }

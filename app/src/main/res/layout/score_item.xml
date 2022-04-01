@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_half">
+
+    <TextView
+            android:id="@+id/tvScoresPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="1"
+            android:layout_weight="10"
+            android:textAlignment="center"/>
+
+    <TextView
+            android:id="@+id/tvScoresName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Player"
+            android:layout_weight="5"
+            />
+
+    <TextView
+            android:id="@+id/tvScoresScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="15"
+            android:layout_weight="10"
+            android:textAlignment="center"/>
+
+</LinearLayout>

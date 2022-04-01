@@ -11,7 +11,7 @@ class MainFragmentViewModel : ViewModel() {
     private var numbersAmount: Int = 0
 
     private val targetNumber: Int = (1..100).random()
-    var numberOfAttempts: Int = 0
+    var numberOfAttempts: Int = 1
 
     fun onKeyboardButtonClick(index: Int) {
         when (index) {
