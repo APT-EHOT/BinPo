@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BinPo</string>
 
-    <string name="begin_message">Ввведите число от 1 до 100</string>
+    <string name="begin_message">Введите число от 1 до 100</string>
     <string name="more_message">Введённое число БОЛЬШЕ загаданного!</string>
     <string name="less_message">Введённое число МЕНЬШЕ загаданного!</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.a1218v.binpo.ui
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.Button
 import android.widget.GridLayout
@@ -12,7 +13,9 @@ import com.a1218v.binpo.R
 import com.a1218v.binpo.databinding.MainFragmentBinding
 import com.a1218v.binpo.viewmodels.MainFragmentViewModel
 import com.a1218v.binpo.viewmodels.ResultState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     private var bindingOrNull: MainFragmentBinding? = null // ? is for nullable variable type
@@ -41,7 +44,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun prepareKeyboard() {
         for (i in 1..12) {
-            val button = Button(activity)
+            val button = Button(ContextThemeWrapper(activity, R.style.keyboardStyle), null, 0)
             button.text = when (i) {
                 10 -> "C"
                 11 -> "0"
